@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content jcr:primaryType="nt:unstructured">
+        <head jcr:primaryType="nt:unstructured">
+            <!-- Overlaying a multi-value property replaces it, so this is the libs list with our
+                 category prepended. Re-check it against /libs/dam/gui/content/assets after AEM updates. -->
+            <clientlibs
+                jcr:primaryType="nt:unstructured"
+                categories="[assets-usage.dam.toolbar,dam.gui.admin.coral,dam.gui.actions.coral,unorm.coral,granite.shared,dam.gui.components.admin.adhocassetshare.coral,cq.common.wcm,dam.gui.view.insight,cq.gui.damadmin.lightbox.coral,cq.siteadmin.common,cq.gui.s7dam.admin.assetviewer,dam.gui.coral.fileupload,dam.gui.coral.backhref,cq.gui.coral.common.admin.timeline,dam.gui.admin.asset.uploadstatus,cq.gui.damadmin.references,dam.gui.admin.publishasset.coral,dam.gui.admin.unpublishasset.coral,dam.gui.coral.common.admin.timeline.events.workflow,dam.gui.coral.common.admin.timeline.events.version,dam.gui.admin.util.coral,dam.gui.coral.relateasset,dam.gui.admin.desktop.coral,dam.gui.coral.assetdetails.assetnavigator.layout,dam.gui.coral.stock.actions,dam.gui.s7dam.admin.dmpublish,dam.gui.admin.asset.uploadrestriction,dam.collection.card.settings,dam-public-link-share]"/>
+        </head>
+        <actions jcr:primaryType="nt:unstructured">
+            <selection jcr:primaryType="nt:unstructured">
+                <usage
+                    jcr:primaryType="nt:unstructured"
+                    sling:orderBefore="exportmetadata"
+                    sling:resourceType="granite/ui/components/coral/foundation/collection/action"
+                    action="assetsusage.open"
+                    activeSelectionCount="single"
+                    ignoreRel="{Boolean}true"
+                    icon="search"
+                    text="Usage"
+                    variant="actionBar">
+                    <granite:rendercondition
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="dam/gui/coral/components/commons/renderconditions/mainasset"/>
+                </usage>
+            </selection>
+        </actions>
+    </jcr:content>
+</jcr:root>

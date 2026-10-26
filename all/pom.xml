@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.github.shrutidamle-aem</groupId>
+        <artifactId>aem-assets-usage</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>aem-assets-usage.all</artifactId>
+    <packaging>content-package</packaging>
+    <name>AEM Assets Usage - All</name>
+    <description>Container package: the core bundle plus the ui.apps package</description>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.jackrabbit</groupId>
+                <artifactId>filevault-package-maven-plugin</artifactId>
+                <configuration>
+                    <packageType>container</packageType>
+                    <properties>
+                        <cloudManagerTarget>all</cloudManagerTarget>
+                    </properties>
+                    <embeddeds>
+                        <embedded>
+                            <groupId>io.github.shrutidamle-aem</groupId>
+                            <artifactId>aem-assets-usage.ui.apps</artifactId>
+                            <type>zip</type>
+                            <target>/apps/assets-usage-packages/application/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>io.github.shrutidamle-aem</groupId>
+                            <artifactId>aem-assets-usage.core</artifactId>
+                            <target>/apps/assets-usage-packages/application/install</target>
+                        </embedded>
+                    </embeddeds>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.github.shrutidamle-aem</groupId>
+            <artifactId>aem-assets-usage.ui.apps</artifactId>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>io.github.shrutidamle-aem</groupId>
+            <artifactId>aem-assets-usage.core</artifactId>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <!-- mvn clean install -PautoInstallSinglePackage : installs the package on a local AEM SDK author -->
+        <profile>
+            <id>autoInstallSinglePackage</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.day.jcr.vault</groupId>
+                        <artifactId>content-package-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>install-package</id>
+                                <goals>
+                                    <goal>install</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

@@ -10,6 +10,8 @@ It also covers usages that are easy to miss:
 - assets referenced from content fragment elements
 - pages grouped into language masters and MSM live copies
 - multifield entries reported as the component that owns them
+- any asset type, not just images: a PDF in a Download component, a Button link or a rich-text
+  link is found too
 
 The examples use the [WKND](https://github.com/adobe/aem-guides-wknd) reference site.
 
@@ -50,14 +52,15 @@ into your modules and rename the package and clientlib category.
 ## Configuration
 
 Components that store an asset path in their own property names are invisible to the property
-lookup until you list those names. By default only the Core Components properties are searched.
+lookup until you list those names. By default the Core Components properties are searched:
+`fileReference`, `fileReferences` and `linkURL` (so a PDF linked from a Button or Teaser is found).
 Add yours through an OSGi config:
 
 `io.github.shrutidamle_aem.assetsusage.impl.AssetReferenceResolverImpl.cfg.json`
 
 ```json
 {
-  "assetProperties": ["fileReference", "fileReferences", "imageUrl", "videoPath"]
+  "assetProperties": ["fileReference", "fileReferences", "linkURL", "imageUrl", "videoPath"]
 }
 ```
 

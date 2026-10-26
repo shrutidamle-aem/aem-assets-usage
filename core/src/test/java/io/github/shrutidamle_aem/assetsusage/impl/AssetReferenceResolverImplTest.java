@@ -103,7 +103,7 @@ class AssetReferenceResolverImplTest {
         resolver.findReferences(ASSET, context.resourceResolver());
 
         assertEquals(1, propertyQueries.size());
-        assertEquals(Map.of("fileReference", ASSET, "fileReferences", ASSET), propertyQueries.get(0));
+        assertEquals(Map.of("fileReference", ASSET, "fileReferences", ASSET, "linkURL", ASSET), propertyQueries.get(0));
     }
 
     @Test

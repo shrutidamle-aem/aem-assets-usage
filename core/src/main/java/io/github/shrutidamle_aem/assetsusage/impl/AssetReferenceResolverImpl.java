@@ -45,14 +45,15 @@ public class AssetReferenceResolverImpl implements AssetReferenceResolver {
 
         /**
          * Properties that hold a DAM asset path as their whole value. {@code fileReference(s)}
-         * is the Core Components convention; custom components often use their own names
+         * (images, downloads) and {@code linkURL} (Button and Teaser links, e.g. to a PDF) are
+         * the Core Components conventions; custom components often use their own names
          * ({@code imageUrl}, {@code videoPath}, ...) and must be added here, or their usages
          * are silently missed.
          */
         @AttributeDefinition(
                 name = "Asset properties",
                 description = "Component properties whose value is a DAM asset path (exact match).")
-        String[] assetProperties() default {"fileReference", "fileReferences"};
+        String[] assetProperties() default {"fileReference", "fileReferences", "linkURL"};
     }
 
     private static final Logger LOG = LoggerFactory.getLogger(AssetReferenceResolverImpl.class);

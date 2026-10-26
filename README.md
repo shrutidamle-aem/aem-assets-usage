@@ -63,11 +63,12 @@ Add yours through an OSGi config:
 
 ## Limitations
 
-- **Indexes:** on large repositories, add Oak property indexes for the asset properties and for
-  `text`, or the queries traverse.
+- **Indexes:** on large repositories, add an Oak property index for the asset properties. The
+  rich-text `LIKE '%…%'` can't use a plain property index; `text` needs a Lucene index that
+  covers it. Without indexes the queries traverse.
 - **Content fragments:** the lookup reads at most 500 fragments, and pages that show a fragment
   are not followed (asset → CF → page).
-- **Rich text:** `_` in a file name is a `LIKE` wildcard and can over-match in rare cases.
+- **Rich text:** `_` and `%` in a file name are `LIKE` wildcards and can over-match in rare cases.
 - **Overlay upkeep:** the overlay repeats the console's clientlib list. Re-check it after AEM
   updates.
 
